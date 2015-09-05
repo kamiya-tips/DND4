@@ -27,6 +27,7 @@ public class Map : MonoBehaviour,IMap
 		GameObject unitObject = GameObject.Instantiate (unitToken);
 		unitObject.transform.parent = transform;
 		newUnit.UnitObject = unitObject;
+		newUnit.UnitObject.SetActive (false);
 	}
 	
 	#endregion

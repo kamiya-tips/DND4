@@ -20,11 +20,11 @@ public class GameEncounter
 		this.map = map;
 		//init unit
 		unitList = new List<GameUnit> ();
-		for (int i = 0; i < encounterTemplate.UnitList.Count; i++) {
-			EncounterUnitData data = encounterTemplate.UnitList [i];
+		for (int i = 0; i < this.encounterTemplate.UnitList.Count; i++) {
+			EncounterUnitData data = this.encounterTemplate.UnitList [i];
 			//map token
 			GameUnit unit = new GameUnit ();
-			unit.Template = unitTemplateManager.GetTemplateById (data.TemplateId);
+			unit.Template = this.unitTemplateManager.GetTemplateById (data.TemplateId);
 			this.map.AddGameUnit (unit);
 			unit.X = data.Pos.X;
 			unit.Y = data.Pos.Y;
@@ -41,10 +41,10 @@ public class GameEncounter
 			GameUnit unit = unitList [nowUnitIndex];
 			unit.Init ();
 			unit.RollInitiative ();
-			initiativeQueue.AddNewUnit (unit);
 			nowUnitIndex++;
-
 			this.map.LookAtPos (new VectorInt2 (unit.X, unit.Y), delegate {
+				unit.UnitObject.SetActive (true);
+				initiativeQueue.AddNewUnit (unit);
 				this.message.ShowMessage (string.Format ("[0000FF]{0}[-]先攻:[00FF00]{1}[-]", unit.Name, unit.Initiative), RollInitiative);
 			});
 		} else {

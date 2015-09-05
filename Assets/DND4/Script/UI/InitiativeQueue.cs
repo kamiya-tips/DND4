@@ -37,7 +37,6 @@ public class InitiativeQueue : MonoBehaviour,IInitiativeQueue
 			toY = 0.0f;
 		}
 		tweenPos.to = new Vector3 (0, toY);
-		tweenPos.duration = 0.5f;
 		tweenPos.ResetToBeginning ();
 		tweenPos.PlayForward ();
 		if (maskHeight > 0.0f) {

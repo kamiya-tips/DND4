@@ -1655,7 +1655,7 @@ MonoBehaviour:
     m_PostInfinity: 2
   ignoreTimeScale: 1
   delay: 0
-  duration: 1
+  duration: .5
   steeperCurves: 0
   tweenGroup: 0
   onFinished: []
@@ -1988,7 +1988,7 @@ Transform:
   m_GameObject: {fileID: 2131762836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00445434311, y: .00445434311, z: .00445434311}
+  m_LocalScale: {x: .00277777785, y: .00277777785, z: .00277777785}
   m_Children:
   - {fileID: 1594290400}
   - {fileID: 30558505}
