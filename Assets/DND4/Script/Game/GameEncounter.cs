@@ -50,9 +50,9 @@ public class GameEncounter
 		} else {
 			this.unitList.Sort (new InitiativeComparer ());
 			this.message.ShowMessage ("先攻调整", StartRound);
+			this.initiativeQueue.SortInitiative ();
 		}
 	}
-
 
 	public void StartRound ()
 	{

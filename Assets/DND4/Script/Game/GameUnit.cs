@@ -18,6 +18,17 @@ public class GameUnit
 		}
 	}
 
+	private GameObject initObject;
+
+	public GameObject InitObject {
+		get {
+			return initObject;
+		}
+		set {
+			initObject = value;
+		}
+	}
+
 	private float tokenSize = 100.0f;
 
 	private int x;
