@@ -13,6 +13,31 @@ public class EncounterTemplateManager
 		templateDic [template.Id] = template;
 
 		EncounterUnitData data = new EncounterUnitData ();
+		data.TemplateId = 4;
+		data.Pos = new VectorInt2 (14, 14);
+		template.UnitList.Add (data);
+
+		data = new EncounterUnitData ();
+		data.TemplateId = 5;
+		data.Pos = new VectorInt2 (15, 13);
+		template.UnitList.Add (data);
+
+		data = new EncounterUnitData ();
+		data.TemplateId = 6;
+		data.Pos = new VectorInt2 (15, 12);
+		template.UnitList.Add (data);
+
+		data = new EncounterUnitData ();
+		data.TemplateId = 7;
+		data.Pos = new VectorInt2 (15, 14);
+		template.UnitList.Add (data);
+
+		data = new EncounterUnitData ();
+		data.TemplateId = 8;
+		data.Pos = new VectorInt2 (14, 12);
+		template.UnitList.Add (data);
+
+		data = new EncounterUnitData ();
 		data.TemplateId = 3;
 		data.Pos = new VectorInt2 (11, 8);
 		template.UnitList.Add (data);
