@@ -1985,8 +1985,7 @@ MonoBehaviour:
   startPanel: {fileID: 1594290399}
   deckPanel: {fileID: 842417461}
   mainPanel: {fileID: 109899044}
-  messageLabel: {fileID: 1831405882}
-  messageTweener: {fileID: 1831405883}
+  messageObject: {fileID: 1831405880}
   mapObject: {fileID: 38332018}
   mapToken: {fileID: 1725362759}
   initRoot: {fileID: 6534386}
