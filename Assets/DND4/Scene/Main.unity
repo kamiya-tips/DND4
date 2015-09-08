@@ -96,7 +96,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 6534386}
   - 114: {fileID: 6534387}
-  - 114: {fileID: 6534388}
   m_Layer: 0
   m_Name: BGSprite
   m_TagString: Untagged
@@ -166,17 +165,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Highlight - Thin
   mFillCenter: 1
---- !u!114 &6534388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 6534385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76b201af402714a5f8b818b0fa22aab7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &30558504
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +287,6 @@ GameObject:
   - 114: {fileID: 38332021}
   - 65: {fileID: 38332022}
   - 114: {fileID: 38332023}
-  - 114: {fileID: 38332024}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -435,18 +422,6 @@ MonoBehaviour:
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
   worldSpace: 0
---- !u!114 &38332024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 38332018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67910520c97894b949798eae4cd7e6be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitToken: {fileID: 1725362759}
 --- !u!1 &109899044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,7 +1963,7 @@ Transform:
   m_GameObject: {fileID: 2131762836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00277777785, y: .00277777785, z: .00277777785}
+  m_LocalScale: {x: .00445434311, y: .00445434311, z: .00445434311}
   m_Children:
   - {fileID: 1594290400}
   - {fileID: 30558505}
@@ -2012,5 +1987,6 @@ MonoBehaviour:
   mainPanel: {fileID: 109899044}
   messageLabel: {fileID: 1831405882}
   messageTweener: {fileID: 1831405883}
-  gameMap: {fileID: 38332024}
-  initiativeQueue: {fileID: 6534388}
+  mapObject: {fileID: 38332018}
+  mapToken: {fileID: 1725362759}
+  initRoot: {fileID: 6534386}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class InitiativeQueue : MonoBehaviour,IInitiativeQueue
+public class InitiativeQueue : IInitiativeQueue
 {
 	private const int TOKEN_SIZE = 50;
 	private Vector3 startPos;
@@ -9,8 +9,11 @@ public class InitiativeQueue : MonoBehaviour,IInitiativeQueue
 	private float baseTop;
 	private List<TweenPosition> tweenPosList = new List<TweenPosition> ();
 	private List<GameUnit> unitList = new List<GameUnit> ();
-	void Awake ()
+	private Transform initRoot;
+
+	public void Init (Transform initRoot)
 	{
+		this.initRoot = initRoot;
 		startPos = new Vector3 (0, -(TOKEN_SIZE / 2));
 		baseTop = Screen.height / 2 - (TOKEN_SIZE / 2);
 	}
@@ -22,7 +25,7 @@ public class InitiativeQueue : MonoBehaviour,IInitiativeQueue
 		//initiativeQueue token
 		GameObject unitObject = GameObject.Instantiate (unit.UnitObject);
 		unit.InitObject = unitObject;
-		unitObject.transform.parent = transform;
+		unitObject.transform.parent = this.initRoot;
 		unitObject.transform.localScale = Vector3.one;
 		unitObject.transform.localPosition = startPos;
 		UISprite uiSprite = unitObject.GetComponent<UISprite> ();

@@ -9,19 +9,24 @@ public class GameWorld : MonoBehaviour,IMessage
 	public GameObject mainPanel;
 	public UILabel messageLabel;
 	public UITweener messageTweener;
-	public Map gameMap;
-	public InitiativeQueue initiativeQueue;
+	public GameObject mapObject;
+	public GameObject mapToken;
+	public Transform initRoot;
+	private Map gameMap = new Map ();
+	private InitiativeQueue initiativeQueue = new InitiativeQueue ();
 	private GameEncounter gameEncounter = new GameEncounter ();
 	private EncounterTemplateManager encounterTemplateManager = new EncounterTemplateManager ();
 	private UnitTemplateManager unitTemplateManager = new UnitTemplateManager ();
 
 	public void InitEncounter ()
 	{
+		initiativeQueue.Init (initRoot);
 		startPanel.SetActive (false);
 		deckPanel.SetActive (true);
 		mainPanel.SetActive (true);
 		unitTemplateManager.Init ();
 		encounterTemplateManager.Init ();
+		gameMap.Init (mapObject.GetComponent<TweenPosition> (), mapObject.transform, mapToken);
 	}
 
 	public void MapShowFinish ()
