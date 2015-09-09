@@ -43,14 +43,19 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 		tweenPos.to = new Vector3 (0, toY);
 		tweenPos.ResetToBeginning ();
 		tweenPos.PlayForward ();
+		PlayInitToken (maskHeight, 1);
+	}
+
+	private void PlayInitToken (float maskHeight, int index)
+	{
 		if (maskHeight > 0.0f) {
 			int size = (1 + tweenPosList.Count - 1) * (tweenPosList.Count - 1) / 2;
 			float step = maskHeight / size;
 			int stepCount = 0;
-			for (int i = 1; i < tweenPosList.Count-1; i++) {
+			for (int i = index; i < unitList.Count; i++) {
 				stepCount += i;
 				float go = step * stepCount;
-				TweenPosition temp = tweenPosList [i];
+				TweenPosition temp = unitList [i].InitObject.GetComponent<TweenPosition> ();
 				temp.from = temp.gameObject.transform.localPosition;
 				temp.to = new Vector3 (temp.from.x, baseTop - TOKEN_SIZE * (i + 1) + go, temp.from.z);
 				temp.ResetToBeginning ();
@@ -70,20 +75,7 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 		if (toY < 0.0f) {
 			maskHeight = -toY;
 		}
-		if (maskHeight > 0.0f) {
-			int size = (1 + tweenPosList.Count - 1) * (tweenPosList.Count - 1) / 2;
-			float step = maskHeight / size;
-			int stepCount = 0;
-			for (int i = 0; i < unitList.Count; i++) {
-				stepCount += i;
-				float go = step * stepCount;
-				TweenPosition temp = unitList [i].InitObject.GetComponent<TweenPosition> ();
-				temp.from = temp.gameObject.transform.localPosition;
-				temp.to = new Vector3 (temp.from.x, baseTop - TOKEN_SIZE * (i + 1) + go, temp.from.z);
-				temp.ResetToBeginning ();
-				temp.PlayForward ();
-			}
-		}
+		PlayInitToken (maskHeight, 0);
 	}
 	#endregion
 }
