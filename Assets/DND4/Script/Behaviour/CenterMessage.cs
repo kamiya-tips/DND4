@@ -1,16 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CenterMessage : IMessage
+public class CenterMessage :MonoBehaviour,IMessage
 {
-	private UILabel messageLabel;
-	private UITweener messageTweener;
-
-	public void Init (UILabel messageLabel, UITweener messageTweener)
-	{ 
-		this.messageLabel = messageLabel;
-		this.messageTweener = messageTweener;
-	}
+	public UILabel messageLabel;
+	public UITweener messageTweener;
 
 	#region IMessage implementation
 	public void ShowMessage (string msg, EventDelegate.Callback callback)

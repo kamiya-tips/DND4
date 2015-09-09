@@ -510,6 +510,7 @@ GameObject:
   - 4: {fileID: 167980312}
   - 114: {fileID: 167980313}
   - 114: {fileID: 167980314}
+  - 114: {fileID: 167980315}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -610,6 +611,20 @@ MonoBehaviour:
   callWhenFinished: 
   from: 0
   to: 1
+--- !u!114 &167980315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 167980311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67910520c97894b949798eae4cd7e6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tween: {fileID: 38332023}
+  mapRoot: {fileID: 38332019}
+  unitToken: {fileID: 1725362759}
 --- !u!1 &237269233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1059,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1282786798}
   - 114: {fileID: 1282786799}
+  - 114: {fileID: 1282786800}
   m_Layer: 0
   m_Name: LeftContainer
   m_TagString: Untagged
@@ -1102,6 +1118,18 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
+--- !u!114 &1282786800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1282786797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b201af402714a5f8b818b0fa22aab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initRoot: {fileID: 6534386}
 --- !u!4 &1310629760 stripped
 Transform:
   m_PrefabParentObject: {fileID: 425080, guid: 822b3bafdce294126922dae180613032, type: 2}
@@ -1115,6 +1143,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1369416640}
   - 114: {fileID: 1369416639}
+  - 114: {fileID: 1369416641}
   m_Layer: 0
   m_Name: CenterContainer
   m_TagString: Untagged
@@ -1172,6 +1201,19 @@ Transform:
   - {fileID: 1831405881}
   m_Father: {fileID: 109899045}
   m_RootOrder: 0
+--- !u!114 &1369416641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1369416638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eac8efd20ed5493e9cfc2ba38fb4664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageLabel: {fileID: 1831405882}
+  messageTweener: {fileID: 1831405883}
 --- !u!1 &1564795494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +2005,7 @@ Transform:
   m_GameObject: {fileID: 2131762836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00445434311, y: .00445434311, z: .00445434311}
+  m_LocalScale: {x: .00506329117, y: .00506329117, z: .00506329117}
   m_Children:
   - {fileID: 1594290400}
   - {fileID: 30558505}
@@ -1985,7 +2027,6 @@ MonoBehaviour:
   startPanel: {fileID: 1594290399}
   deckPanel: {fileID: 842417461}
   mainPanel: {fileID: 109899044}
-  messageObject: {fileID: 1831405880}
-  mapObject: {fileID: 38332018}
-  mapToken: {fileID: 1725362759}
-  initRoot: {fileID: 6534386}
+  gameMap: {fileID: 167980315}
+  initiativeQueue: {fileID: 1282786800}
+  message: {fileID: 1369416641}

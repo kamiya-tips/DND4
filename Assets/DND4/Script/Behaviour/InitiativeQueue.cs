@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class InitiativeQueue : IInitiativeQueue
+public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 {
+	public Transform initRoot;
 	private const int TOKEN_SIZE = 50;
 	private Vector3 startPos;
 	private int startDepth = 20;
 	private float baseTop;
 	private List<TweenPosition> tweenPosList = new List<TweenPosition> ();
 	private List<GameUnit> unitList = new List<GameUnit> ();
-	private Transform initRoot;
 
-	public void Init (Transform initRoot)
+	public void Awake ()
 	{
-		this.initRoot = initRoot;
 		startPos = new Vector3 (0, -(TOKEN_SIZE / 2));
 		baseTop = Screen.height / 2 - (TOKEN_SIZE / 2);
 	}

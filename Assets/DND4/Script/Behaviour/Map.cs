@@ -1,18 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Map : IMap
+public class Map :MonoBehaviour, IMap
 {
-	private TweenPosition tween;	
-	private Transform mapRoot;
-	private GameObject unitToken;
-
-	public void Init (TweenPosition tween, Transform mapRoot, GameObject unitToken)
-	{
-		this.tween = tween;
-		this.mapRoot = mapRoot;
-		this.unitToken = unitToken;
-	}
+	public TweenPosition tween;	
+	public Transform mapRoot;
+	public GameObject unitToken;
 
 	#region IMap implementation
 	
