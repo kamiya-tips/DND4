@@ -8,10 +8,11 @@ public class GameWorld : MonoBehaviour
 	public GameObject startPanel;
 	public GameObject deckPanel;
 	public GameObject mainPanel;
-	//map
+
 	public Map gameMap;
 	public InitiativeQueue initiativeQueue;
 	public CenterMessage message;
+	public TokenCard tokenCard;
 
 	private GameEncounter gameEncounter = new GameEncounter ();
 	private EncounterTemplateManager encounterTemplateManager = new EncounterTemplateManager ();
@@ -33,6 +34,6 @@ public class GameWorld : MonoBehaviour
 	{
 		//load encounter
 		EncounterTemplate encounterTemplate = encounterTemplateManager.GetTemplateById (1);
-		gameEncounter.Init (encounterTemplate, unitTemplateManager, message, initiativeQueue, gameMap);
+		gameEncounter.Init (encounterTemplate, unitTemplateManager, message, initiativeQueue, gameMap, tokenCard);
 	}
 }

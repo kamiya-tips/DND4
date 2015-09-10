@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 470348}
   - 114: {fileID: 11421436}
   m_Layer: 0
-  m_Name: LVValueLabel
+  m_Name: LvValueLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,6 +121,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 425080}
   - 114: {fileID: 11485180}
+  - 114: {fileID: 11433816}
   m_Layer: 0
   m_Name: TokenCardSprite
   m_TagString: Untagged
@@ -218,7 +219,7 @@ GameObject:
   - 4: {fileID: 470612}
   - 114: {fileID: 11405752}
   m_Layer: 0
-  m_Name: LVLabel
+  m_Name: LvLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +316,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -254, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 431996}
@@ -528,7 +529,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5999999
+  aspectRatio: 1.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11430530, guid: 11a465d4522be4656a0c503e220af40c, type: 2}
@@ -658,7 +659,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5999999
+  aspectRatio: 1.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11430530, guid: 11a465d4522be4656a0c503e220af40c, type: 2}
@@ -723,7 +724,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.88888884
+  aspectRatio: 1.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11430530, guid: 11a465d4522be4656a0c503e220af40c, type: 2}
@@ -947,6 +948,26 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &11433816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887d1eff1ab3c483c8282304cb014eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 11458710}
+  unitName: {fileID: 11446274}
+  lv: {fileID: 11421436}
+  speed: {fileID: 11446072}
+  hp: {fileID: 11439194}
+  ac: {fileID: 11413796}
+  fortitude: {fileID: 11412152}
+  reflex: {fileID: 11400202}
+  will: {fileID: 11434192}
 --- !u!114 &11434192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -983,7 +1004,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5999999
+  aspectRatio: 1.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11430530, guid: 11a465d4522be4656a0c503e220af40c, type: 2}
@@ -1048,7 +1069,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5999999
+  aspectRatio: 2
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11430530, guid: 11a465d4522be4656a0c503e220af40c, type: 2}
@@ -1423,7 +1444,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5999999
+  aspectRatio: 2
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11430530, guid: 11a465d4522be4656a0c503e220af40c, type: 2}
@@ -1538,7 +1559,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5999999
+  aspectRatio: 2
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11430530, guid: 11a465d4522be4656a0c503e220af40c, type: 2}

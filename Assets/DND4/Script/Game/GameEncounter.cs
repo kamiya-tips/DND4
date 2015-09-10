@@ -8,16 +8,18 @@ public class GameEncounter
 	private IMessage message;
 	private IInitiativeQueue initiativeQueue;
 	private IMap map;
+	private ITokenCard tokenCard;
 	private EncounterTemplate encounterTemplate;
 	private UnitTemplateManager unitTemplateManager;
 
-	public void Init (EncounterTemplate encounterTemplate, UnitTemplateManager unitTemplateManager, IMessage message, IInitiativeQueue initiativeQueue, IMap map)
+	public void Init (EncounterTemplate encounterTemplate, UnitTemplateManager unitTemplateManager, IMessage message, IInitiativeQueue initiativeQueue, IMap map, ITokenCard tokenCard)
 	{
 		this.encounterTemplate = encounterTemplate;
 		this.unitTemplateManager = unitTemplateManager;
 		this.message = message;
 		this.initiativeQueue = initiativeQueue;
 		this.map = map;
+		this.tokenCard = tokenCard;
 		//init unit
 		unitList = new List<GameUnit> ();
 		for (int i = 0; i < this.encounterTemplate.UnitList.Count; i++) {
@@ -41,6 +43,7 @@ public class GameEncounter
 			GameUnit unit = unitList [nowUnitIndex];
 			unit.Init ();
 			unit.RollInitiative ();
+			tokenCard.UpdateToken (unit);
 			nowUnitIndex++;
 			this.map.LookAtPos (new VectorInt2 (unit.X, unit.Y), delegate {
 				unit.UnitObject.SetActive (true);
