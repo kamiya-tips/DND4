@@ -64,7 +64,7 @@ public class GameEncounter
 		}
 		nowUnitIndex = 0;
 		round++;
-		this.message.ShowMessage (string.Format ("第{0}回合", round), null);
+		this.message.ShowMessage (string.Format ("第{0}回合", round), NextUnit);
 	}
 
 	public void NextUnit ()
@@ -72,7 +72,13 @@ public class GameEncounter
 		if (nowUnitIndex >= unitList.Count) {
 			StartRound ();
 		}
-		unitList [nowUnitIndex].StartTurn ();
+		GameUnit nowUnit = unitList [nowUnitIndex];
+		map.LookAtPos (new VectorInt2 (nowUnit.X, nowUnit.Y), delegate {
+			this.message.ShowMessage (string.Format ("[0000FF]{0}[-]开始行动", nowUnit.Name), delegate {
+				nowUnit.StartTurn ();
+			});
+			tokenCard.UpdateToken (nowUnit);
+		});
 		nowUnitIndex++;
 	}
 }
