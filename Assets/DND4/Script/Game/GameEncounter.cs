@@ -9,10 +9,11 @@ public class GameEncounter
 	private IInitiativeQueue initiativeQueue;
 	private IMap map;
 	private ITokenCard tokenCard;
+	private IActionMenu actionMenu;
 	private EncounterTemplate encounterTemplate;
 	private UnitTemplateManager unitTemplateManager;
 
-	public void Init (EncounterTemplate encounterTemplate, UnitTemplateManager unitTemplateManager, IMessage message, IInitiativeQueue initiativeQueue, IMap map, ITokenCard tokenCard)
+	public void Init (EncounterTemplate encounterTemplate, UnitTemplateManager unitTemplateManager, IMessage message, IInitiativeQueue initiativeQueue, IMap map, ITokenCard tokenCard, IActionMenu actionMenu)
 	{
 		this.encounterTemplate = encounterTemplate;
 		this.unitTemplateManager = unitTemplateManager;
@@ -20,6 +21,7 @@ public class GameEncounter
 		this.initiativeQueue = initiativeQueue;
 		this.map = map;
 		this.tokenCard = tokenCard;
+		this.actionMenu = actionMenu;
 		//init unit
 		unitList = new List<GameUnit> ();
 		for (int i = 0; i < this.encounterTemplate.UnitList.Count; i++) {
@@ -42,6 +44,7 @@ public class GameEncounter
 		if (nowUnitIndex < unitList.Count) {
 			GameUnit unit = unitList [nowUnitIndex];
 			unit.Init ();
+			unit.GameEncounter = this;
 			unit.RollInitiative ();
 			tokenCard.UpdateToken (unit);
 			nowUnitIndex++;
@@ -69,16 +72,19 @@ public class GameEncounter
 
 	public void NextUnit ()
 	{
+		actionMenu.Hide ();
 		if (nowUnitIndex >= unitList.Count) {
 			StartRound ();
-		}
-		GameUnit nowUnit = unitList [nowUnitIndex];
-		map.LookAtPos (new VectorInt2 (nowUnit.X, nowUnit.Y), delegate {
-			this.message.ShowMessage (string.Format ("[0000FF]{0}[-]开始行动", nowUnit.Name), delegate {
-				nowUnit.StartTurn ();
+		} else {
+			GameUnit nowUnit = unitList [nowUnitIndex];
+			map.LookAtPos (new VectorInt2 (nowUnit.X, nowUnit.Y), delegate {
+				this.message.ShowMessage (string.Format ("[0000FF]{0}[-]开始行动", nowUnit.Name), delegate {
+					nowUnit.StartTurn ();
+					actionMenu.Show (nowUnit.GetActionList ());
+				});
+				tokenCard.UpdateToken (nowUnit);
 			});
-			tokenCard.UpdateToken (nowUnit);
-		});
-		nowUnitIndex++;
+			nowUnitIndex++;
+		}
 	}
 }

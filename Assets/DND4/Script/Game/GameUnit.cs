@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameUnit
 {
@@ -143,5 +144,16 @@ public class GameUnit
 	public void EndTurn ()
 	{
 		gameEncounter.NextUnit ();
+	}
+
+	public List<ActionMenuItem> GetActionList ()
+	{
+		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
+		ActionMenuItem item = new ActionMenuItem ();
+		actionList.Add (item);
+		item.Name = "回合结束";
+		item.OnClick = EndTurn;
+		item.Enable = true;
+		return actionList;
 	}
 }

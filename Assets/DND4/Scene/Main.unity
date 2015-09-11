@@ -151,7 +151,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .224215239
+  aspectRatio: .186567158
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -1768,7 +1768,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1831405880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 800, y: 0, z: 0}
+  m_LocalPosition: {x: 900, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1369416640}
@@ -1884,8 +1884,8 @@ MonoBehaviour:
   onFinished: []
   eventReceiver: {fileID: 0}
   callWhenFinished: 
-  from: {x: 800, y: 0, z: 0}
-  to: {x: -800, y: 0, z: 0}
+  from: {x: 900, y: 0, z: 0}
+  to: {x: -900, y: 0, z: 0}
   worldSpace: 0
 --- !u!114 &1987281341 stripped
 MonoBehaviour:
@@ -2080,3 +2080,4 @@ MonoBehaviour:
   initiativeQueue: {fileID: 1282786800}
   message: {fileID: 1369416641}
   tokenCard: {fileID: 1987281341}
+  actionMenu: {fileID: 1764704295}

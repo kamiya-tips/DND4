@@ -15,6 +15,9 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 			GameObject newButton = GameObject.Instantiate (buttonObj);
 			newButton.transform.parent = bgSprite.transform;
 			newButton.GetComponent<ActionMenuButton> ().Init (item);
+			newButton.transform.localPosition = Vector3.zero;
+			newButton.transform.localScale = Vector3.one;
+			newButton.SetActive (item.Enable);
 		}
 		bgSprite.gameObject.SetActive (true);
 	}
