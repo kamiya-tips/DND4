@@ -43,7 +43,7 @@ public class GameEncounter
 	{
 		if (nowUnitIndex < unitList.Count) {
 			GameUnit unit = unitList [nowUnitIndex];
-			unit.Init ();
+			unit.Init (nowUnitIndex);
 			unit.GameEncounter = this;
 			unit.RollInitiative ();
 			tokenCard.UpdateToken (unit);

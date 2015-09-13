@@ -5,27 +5,57 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 {
 	public Transform initRoot;
 	private const int TOKEN_SIZE = 50;
-	private Vector3 startPos;
-	private int startDepth = 20;
+	private Vector3 addPos;
+	private Vector3 endTurnPos;
+	private Vector3 activePos;
+	private int startDepth = 100;
+	private int endDepth = 50;
 	private float baseTop;
 	private List<GameUnit> unitList = new List<GameUnit> ();
-
+	private List<GameUnit> endList = new List<GameUnit> ();
 	public void Awake ()
 	{
-		startPos = new Vector3 (0, -(TOKEN_SIZE / 2));
+		addPos = new Vector3 (0, -(TOKEN_SIZE / 2));
 		baseTop = Screen.height / 2 - (TOKEN_SIZE / 2);
+		endTurnPos = Vector3.zero;
+		activePos = new Vector3 (0, baseTop);
 	}
 
 	#region IInitiativeQueue implementation
 
 	public void UnitStartTurn ()
 	{
-
+		if (unitList.Count > 0) {
+			GameUnit gameUnit = unitList [0];
+			unitList.RemoveAt (0);
+			endList.Add (gameUnit);
+			TweenPosition tweenPos = gameUnit.InitObject.GetComponent<TweenPosition> ();
+			tweenPos.from = gameUnit.InitObject.transform.localPosition;
+			tweenPos.to = activePos;
+			tweenPos.ResetToBeginning ();
+			tweenPos.PlayForward ();
+			gameUnit.InitObject.GetComponent<UISprite> ().depth = endDepth - endList.Count;
+			SortInitiative ();
+		}
 	}
 
 	public void UnitEndTurn ()
 	{
-
+		if (unitList.Count == 0) {
+			for (int i = 0; i < endList.Count; i++) {
+				unitList.Add (endList [i]);
+			}
+			endList.Clear ();
+			SortInitiative ();
+		}
+		if (endList.Count > 0) {
+			GameUnit gameUnit = endList [endList.Count - 1];
+			TweenPosition tweenPos = gameUnit.InitObject.GetComponent<TweenPosition> ();
+			tweenPos.from = gameUnit.InitObject.transform.localPosition;
+			tweenPos.to = endTurnPos;
+			tweenPos.ResetToBeginning ();
+			tweenPos.PlayForward ();
+		}
 	}
 
 	public void AddNewUnit (GameUnit unit)
@@ -36,13 +66,13 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 		unit.InitObject = unitObject;
 		unitObject.transform.parent = this.initRoot;
 		unitObject.transform.localScale = Vector3.one;
-		unitObject.transform.localPosition = startPos;
+		unitObject.transform.localPosition = addPos;
 		UISprite uiSprite = unitObject.GetComponent<UISprite> ();
 		uiSprite.depth = startDepth - unitList.Count;
 		uiSprite.height = TOKEN_SIZE;
 		uiSprite.width = TOKEN_SIZE;
 		TweenPosition tweenPos = unitObject.GetComponent<TweenPosition> ();
-		tweenPos.from = startPos;
+		tweenPos.from = addPos;
 		float toY = baseTop - TOKEN_SIZE * unitList.Count;
 		float maskHeight = 0.0f;
 		if (toY < 0.0f) {

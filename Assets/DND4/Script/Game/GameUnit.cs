@@ -116,10 +116,18 @@ public class GameUnit
 	{
 		hp -= damage;
 	}
+	private int index;
 
-	public void Init ()
+	public int Index {
+		get {
+			return index;
+		}
+	}
+
+	public void Init (int index)
 	{
 		Hp = template.Hp;
+		this.index = index;
 	}
 
 	public string Name {
