@@ -56,12 +56,12 @@ public class GameEncounter
 		} else {
 			this.unitList.Sort (new InitiativeComparer ());
 			this.message.ShowMessage ("先攻调整", StartRound);
-			this.initiativeQueue.SortInitiative ();
 		}
 	}
 
 	public void StartRound ()
 	{
+		this.initiativeQueue.SortInitiative ();
 		foreach (GameUnit unit in unitList) {
 			unit.StartRound ();
 		}
@@ -72,11 +72,13 @@ public class GameEncounter
 
 	public void NextUnit ()
 	{
+		initiativeQueue.UnitEndTurn ();
 		actionMenu.Hide ();
 		if (nowUnitIndex >= unitList.Count) {
 			StartRound ();
 		} else {
 			GameUnit nowUnit = unitList [nowUnitIndex];
+			initiativeQueue.UnitStartTurn ();
 			map.LookAtPos (new VectorInt2 (nowUnit.X, nowUnit.Y), delegate {
 				this.message.ShowMessage (string.Format ("[0000FF]{0}[-]开始行动", nowUnit.Name), delegate {
 					nowUnit.StartTurn ();

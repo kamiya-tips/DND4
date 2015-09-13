@@ -8,7 +8,6 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 	private Vector3 startPos;
 	private int startDepth = 20;
 	private float baseTop;
-	private List<TweenPosition> tweenPosList = new List<TweenPosition> ();
 	private List<GameUnit> unitList = new List<GameUnit> ();
 
 	public void Awake ()
@@ -18,6 +17,17 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 	}
 
 	#region IInitiativeQueue implementation
+
+	public void UnitStartTurn ()
+	{
+
+	}
+
+	public void UnitEndTurn ()
+	{
+
+	}
+
 	public void AddNewUnit (GameUnit unit)
 	{
 		unitList.Add (unit);
@@ -28,13 +38,12 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 		unitObject.transform.localScale = Vector3.one;
 		unitObject.transform.localPosition = startPos;
 		UISprite uiSprite = unitObject.GetComponent<UISprite> ();
-		uiSprite.depth = startDepth - tweenPosList.Count;
+		uiSprite.depth = startDepth - unitList.Count;
 		uiSprite.height = TOKEN_SIZE;
 		uiSprite.width = TOKEN_SIZE;
 		TweenPosition tweenPos = unitObject.GetComponent<TweenPosition> ();
-		tweenPosList.Add (tweenPos);
 		tweenPos.from = startPos;
-		float toY = baseTop - TOKEN_SIZE * tweenPosList.Count;
+		float toY = baseTop - TOKEN_SIZE * unitList.Count;
 		float maskHeight = 0.0f;
 		if (toY < 0.0f) {
 			maskHeight = -toY;
@@ -49,7 +58,7 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 	private void PlayInitToken (float maskHeight, int index)
 	{
 		if (maskHeight > 0.0f) {
-			int size = (1 + tweenPosList.Count - 1) * (tweenPosList.Count - 1) / 2;
+			int size = (1 + unitList.Count - 1) * (unitList.Count - 1) / 2;
 			float step = maskHeight / size;
 			int stepCount = 0;
 			for (int i = index; i < unitList.Count; i++) {
@@ -70,7 +79,7 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 		for (int i = 0; i < unitList.Count; i++) {
 			unitList [i].InitObject.GetComponent<UISprite> ().depth = startDepth - i;
 		}
-		float toY = baseTop - TOKEN_SIZE * tweenPosList.Count;
+		float toY = baseTop - TOKEN_SIZE * unitList.Count;
 		float maskHeight = 0.0f;
 		if (toY < 0.0f) {
 			maskHeight = -toY;
