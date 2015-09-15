@@ -154,14 +154,27 @@ public class GameUnit
 		gameEncounter.NextUnit ();
 	}
 
+	public void MoveAction ()
+	{
+
+	}
+
 	public List<ActionMenuItem> GetActionList ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
 		ActionMenuItem item = new ActionMenuItem ();
+
+		actionList.Add (item);
+		item.Name = "移动动作";
+		item.OnClick = MoveAction;
+		item.Enable = true;
+
+		item = new ActionMenuItem ();
 		actionList.Add (item);
 		item.Name = "回合结束";
 		item.OnClick = EndTurn;
 		item.Enable = true;
+
 		return actionList;
 	}
 }
