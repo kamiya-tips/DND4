@@ -165,9 +165,21 @@ public class GameUnit
 		ActionMenuItem item = new ActionMenuItem ();
 
 		actionList.Add (item);
+		item.Name = "标准动作";
+		item.OnClick = MoveAction;
+		item.Enable = false;
+
+		item = new ActionMenuItem ();
+		actionList.Add (item);
 		item.Name = "移动动作";
 		item.OnClick = MoveAction;
-		item.Enable = true;
+		item.Enable = false;
+
+		item = new ActionMenuItem ();
+		actionList.Add (item);
+		item.Name = "次要动作";
+		item.OnClick = MoveAction;
+		item.Enable = false;
 
 		item = new ActionMenuItem ();
 		actionList.Add (item);
