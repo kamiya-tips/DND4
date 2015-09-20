@@ -14,7 +14,7 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 	{
 		buttonPos = new int[4][];
 		buttonPos [0] = new int[]{0};
-		buttonPos [1] = new int[]{15,-15};
+		buttonPos [1] = new int[]{13,-13};
 		buttonPos [2] = new int[]{30,0,-30};
 		buttonPos [3] = new int[]{45,15,-15,-45};
 	}

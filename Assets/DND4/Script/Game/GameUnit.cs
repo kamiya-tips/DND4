@@ -16,6 +16,7 @@ public class GameUnit
 			unitObject.transform.localScale = Vector3.one;
 			UISprite sprite = unitObject.GetComponent<UISprite> ();
 			sprite.spriteName = template.SpriteName;
+			EventDelegate.Add (unitObject.GetComponent<UIButton> ().onClick, OnClickAndShowMainMeun);
 		}
 	}
 
@@ -157,6 +158,12 @@ public class GameUnit
 	public void MoveAction ()
 	{
 
+	}
+
+	public void OnClickAndShowMainMeun ()
+	{
+		GameWorld.Instance.actionMenu.Hide ();
+		GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (x, y), ShowMainMeun);
 	}
 
 	public void ShowMainMeun ()
