@@ -170,7 +170,7 @@ public class GameUnit
 	public void ShowMainMeun ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
-		actionList.Add (BuildActionMenuItem ("移动动作", ShowMainMeun, true));
+		actionList.Add (BuildActionMenuItem ("移动动作", ShowMoveMenu, true));
 		actionList.Add (BuildActionMenuItem ("回合结束", EndTurn, true));
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
