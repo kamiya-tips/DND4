@@ -22,6 +22,7 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 	#region IActionMenu implementation
 	public void Show (List<ActionMenuItem> actionMenuItemList)
 	{
+		Hide ();
 		for (int i = 0; i < buttonList.Count; i++) {
 			GameObject.Destroy (buttonList [i]);
 		}

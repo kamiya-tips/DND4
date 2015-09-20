@@ -159,34 +159,52 @@ public class GameUnit
 
 	}
 
-	public List<ActionMenuItem> GetActionList ()
+	public void ShowMainMeun ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
 		ActionMenuItem item = new ActionMenuItem ();
-
+		/*
 		actionList.Add (item);
 		item.Name = "标准动作";
 		item.OnClick = MoveAction;
 		item.Enable = false;
-
+		*/
 		item = new ActionMenuItem ();
 		actionList.Add (item);
 		item.Name = "移动动作";
-		item.OnClick = MoveAction;
-		item.Enable = false;
-
+		item.OnClick = ShowMoveMenu;
+		item.Enable = true;
+		/*
 		item = new ActionMenuItem ();
 		actionList.Add (item);
 		item.Name = "次要动作";
 		item.OnClick = MoveAction;
 		item.Enable = false;
-
+		*/
 		item = new ActionMenuItem ();
 		actionList.Add (item);
 		item.Name = "回合结束";
 		item.OnClick = EndTurn;
 		item.Enable = true;
 
-		return actionList;
+		GameWorld.Instance.actionMenu.Show (actionList);
+	}
+
+	protected void ShowMoveMenu ()
+	{
+		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
+		ActionMenuItem item = new ActionMenuItem ();
+		
+		actionList.Add (item);
+		item.Name = "移动";
+		item.OnClick = MoveAction;
+		item.Enable = true;
+
+		item = new ActionMenuItem ();
+		actionList.Add (item);
+		item.Name = "返回";
+		item.OnClick = ShowMainMeun;
+		item.Enable = true;
+		GameWorld.Instance.actionMenu.Show (actionList);
 	}
 }

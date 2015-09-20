@@ -19,6 +19,20 @@ public class GameWorld : MonoBehaviour
 	private EncounterTemplateManager encounterTemplateManager = new EncounterTemplateManager ();
 	private UnitTemplateManager unitTemplateManager = new UnitTemplateManager ();
 
+	private static GameWorld instance;
+
+	public static GameWorld Instance {
+		get {
+			return instance;
+		}
+	}
+
+	public void Start ()
+	{
+		if (GameWorld.instance == null) {
+			GameWorld.instance = this;
+		}
+	}
 
 	public void InitEncounter ()
 	{

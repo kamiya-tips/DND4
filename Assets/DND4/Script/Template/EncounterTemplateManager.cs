@@ -14,27 +14,27 @@ public class EncounterTemplateManager
 
 		EncounterUnitData data = new EncounterUnitData ();
 		data.TemplateId = 4;
-		data.Pos = new VectorInt2 (14, 14);
+		data.Pos = new VectorInt2 (0, 5);
 		template.UnitList.Add (data);
 
 		data = new EncounterUnitData ();
 		data.TemplateId = 5;
-		data.Pos = new VectorInt2 (15, 13);
+		data.Pos = new VectorInt2 (0, 6);
 		template.UnitList.Add (data);
 
 		data = new EncounterUnitData ();
 		data.TemplateId = 6;
-		data.Pos = new VectorInt2 (15, 12);
+		data.Pos = new VectorInt2 (0, 7);
 		template.UnitList.Add (data);
 
 		data = new EncounterUnitData ();
 		data.TemplateId = 7;
-		data.Pos = new VectorInt2 (15, 14);
+		data.Pos = new VectorInt2 (1, 5);
 		template.UnitList.Add (data);
 
 		data = new EncounterUnitData ();
 		data.TemplateId = 8;
-		data.Pos = new VectorInt2 (14, 12);
+		data.Pos = new VectorInt2 (1, 7);
 		template.UnitList.Add (data);
 
 		data = new EncounterUnitData ();

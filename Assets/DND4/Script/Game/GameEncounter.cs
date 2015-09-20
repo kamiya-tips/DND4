@@ -82,7 +82,7 @@ public class GameEncounter
 			map.LookAtPos (new VectorInt2 (nowUnit.X, nowUnit.Y), delegate {
 				this.message.ShowMessage (string.Format ("[0000FF]{0}[-]开始行动", nowUnit.Name), delegate {
 					nowUnit.StartTurn ();
-					actionMenu.Show (nowUnit.GetActionList ());
+					nowUnit.ShowMainMeun ();
 				});
 				tokenCard.UpdateToken (nowUnit);
 			});
