@@ -164,12 +164,13 @@ public class GameUnit
 	{
 		GameWorld.Instance.actionMenu.Hide ();
 		GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (x, y), ShowMainMeun);
+		GameWorld.Instance.aimTokenCard.UpdateToken (this);
 	}
 
 	public void ShowMainMeun ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
-		actionList.Add (BuildActionMenuItem ("移动动作", ShowMoveMenu, true));
+		actionList.Add (BuildActionMenuItem ("移动动作", ShowMainMeun, true));
 		actionList.Add (BuildActionMenuItem ("回合结束", EndTurn, true));
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
@@ -182,7 +183,7 @@ public class GameUnit
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
 
-	private ActionMenuItem BuildActionMenuItem (string name, EventDelegate onClick, bool enable)
+	private ActionMenuItem BuildActionMenuItem (string name, EventDelegate.Callback onClick, bool enable)
 	{
 		ActionMenuItem item = new ActionMenuItem ();
 		item.Name = name;
