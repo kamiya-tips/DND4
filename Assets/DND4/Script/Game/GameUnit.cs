@@ -4,6 +4,14 @@ using System.Collections.Generic;
 
 public class GameUnit
 {
+	private bool isActive = false;
+
+	public bool IsActive {
+		get {
+			return isActive;
+		}
+	}
+
 	private GameObject unitObject;
 
 	public GameObject UnitObject {
@@ -147,11 +155,12 @@ public class GameUnit
 
 	public void StartTurn ()
 	{
-
+		isActive = true;
 	}
 
 	public void EndTurn ()
 	{
+		isActive = false;
 		gameEncounter.NextUnit ();
 	}
 
@@ -163,7 +172,11 @@ public class GameUnit
 	public void OnClickAndShowMainMeun ()
 	{
 		GameWorld.Instance.actionMenu.Hide ();
-		GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (x, y), ShowMainMeun);
+		if (isActive == true) {
+			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (x, y), ShowMainMeun);
+		} else {
+			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (x, y), null);
+		}
 		GameWorld.Instance.aimTokenCard.UpdateToken (this);
 	}
 

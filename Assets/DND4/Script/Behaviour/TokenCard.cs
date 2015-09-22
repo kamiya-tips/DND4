@@ -12,10 +12,16 @@ public class TokenCard : MonoBehaviour,ITokenCard
 	public UILabel fortitude;
 	public UILabel reflex;
 	public UILabel will;
+	private GameUnit showUnit;
 	#region ITokenCard implementation
 	public void UpdateToken (GameUnit unit)
 	{
+		this.showUnit = unit;
 		sprite.spriteName = unit.UnitObject.GetComponent<UISprite> ().spriteName;
+		UIButton uiButton = sprite.gameObject.GetComponent<UIButton> ();
+		if (uiButton != null) {
+			uiButton.normalSprite = sprite.spriteName;
+		}
 		unitName.text = unit.Name;
 		lv.text = unit.Template.Lv.ToString ();
 		speed.text = unit.Template.Speed.ToString ();
@@ -26,5 +32,11 @@ public class TokenCard : MonoBehaviour,ITokenCard
 		will.text = unit.Template.Will.ToString ();
 	}
 	#endregion
-	
+
+	public void OnClick ()
+	{
+		if (showUnit != null) {
+			showUnit.OnClickAndShowMainMeun ();
+		}
+	}
 }

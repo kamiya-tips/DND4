@@ -151,7 +151,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .186567158
+  aspectRatio: .129870132
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -788,22 +788,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 425080, guid: 822b3bafdce294126922dae180613032, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 425080, guid: 822b3bafdce294126922dae180613032, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 425080, guid: 822b3bafdce294126922dae180613032, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11485180, guid: 822b3bafdce294126922dae180613032, type: 2}
-      propertyPath: mPivot
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 822b3bafdce294126922dae180613032, type: 2}
   m_IsPrefabParent: 0
@@ -1255,6 +1239,51 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 346399330}
   m_Script: {fileID: 11500000, guid: 887d1eff1ab3c483c8282304cb014eac, type: 3}
+--- !u!1 &1355914582 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 103962, guid: 822b3bafdce294126922dae180613032, type: 2}
+  m_PrefabInternal: {fileID: 2051424124}
+--- !u!114 &1355914585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1355914582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 1355914582}
+  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
+  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
+  disabledColor: {r: .5, g: .5, b: .5, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 1987281341}
+    mMethodName: OnClick
+    mParameters: []
+    oneShot: 0
+--- !u!65 &1355914586
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1355914582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50, z: 0}
+  m_Center: {x: 25, y: -25, z: 0}
 --- !u!1 &1369416638
 GameObject:
   m_ObjectHideFlags: 0
