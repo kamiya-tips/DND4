@@ -9,12 +9,15 @@ public class Map :MonoBehaviour, IMap
 	public GameObject unitToken;
 	public GameObject moveTile;
 	private List<GameObject> moveTileList = new List<GameObject> ();
+	private int mapH = 21;
+	private int mapW = 30;
+	private int tileSize = 100;
 	#region IMap implementation
 	
 	public void LookAtPos (VectorInt2 pos, EventDelegate.Callback callback)
 	{
 		tween.from = mapRoot.localPosition;
-		tween.to = new Vector3 (-pos.X * 100 + Screen.width / 2 - 50, -pos.Y * 100 + Screen.height / 2 - 50);
+		tween.to = new Vector3 (-pos.X * tileSize + Screen.width / 2 - tileSize / 2, -pos.Y * tileSize + Screen.height / 2 - tileSize / 2);
 		EventDelegate.Add (tween.onFinished, callback, true);
 		tween.ResetToBeginning ();
 		tween.PlayForward ();
@@ -47,6 +50,12 @@ public class Map :MonoBehaviour, IMap
 	{
 		for (int i = -range; i <= range; i++) {
 			for (int j = -range; j <= range; j++) {
+				if (x + i < 0 || y + j < 0) {
+					continue;
+				}
+				if (x + i >= mapW || y + j >= mapH) {
+					continue;
+				}
 				if (i == 0 && j == 0) {
 					continue;
 				}
@@ -55,9 +64,17 @@ public class Map :MonoBehaviour, IMap
 				moveTileList.Add (tile);
 				tile.transform.localPosition = Vector3.zero;
 				tile.transform.localScale = Vector3.one;
-				tile.transform.localPosition = new Vector3 ((x + i) * 100, (y + j) * 100);
+				tile.transform.localPosition = new Vector3 ((x + i) * tileSize, (y + j) * tileSize);
 			}
 		}
+	}
+
+	public void HideArea ()
+	{
+		for (int i = 0; i < moveTileList.Count; i++) {
+			GameObject.Destroy (moveTileList [i]);
+		}
+		moveTileList.Clear ();
 	}
 
 	#endregion

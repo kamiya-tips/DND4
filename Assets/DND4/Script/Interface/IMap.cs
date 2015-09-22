@@ -8,4 +8,5 @@ public interface IMap
 	void ShowMoveArea (GameUnit moveUnit);
 	void ShowRunArea (GameUnit moveUnit);
 	void ShowShiftArea (GameUnit moveUnit);
+	void HideArea ();
 }
