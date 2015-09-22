@@ -211,6 +211,15 @@ public class GameUnit
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
 
+	protected void ShowMoveActionMenu ()
+	{
+		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
+		actionList.Add (BuildActionMenuItem ("确定", WalkAction, true));
+		actionList.Add (BuildActionMenuItem ("取消", RunAction, true));
+		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
+		GameWorld.Instance.actionMenu.Show (actionList);
+	}
+
 	private ActionMenuItem BuildActionMenuItem (string name, EventDelegate.Callback onClick, bool enable)
 	{
 		ActionMenuItem item = new ActionMenuItem ();
