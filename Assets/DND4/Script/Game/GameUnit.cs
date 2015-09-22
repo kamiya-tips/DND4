@@ -166,7 +166,8 @@ public class GameUnit
 
 	public void MoveAction ()
 	{
-
+		GameWorld.Instance.actionMenu.Hide ();
+		GameWorld.Instance.gameMap.ShowMoveArea (this);
 	}
 
 	public void OnClickAndShowMainMeun ()
