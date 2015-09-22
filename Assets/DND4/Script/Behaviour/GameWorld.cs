@@ -20,6 +20,12 @@ public class GameWorld : MonoBehaviour
 	private EncounterTemplateManager encounterTemplateManager = new EncounterTemplateManager ();
 	private UnitTemplateManager unitTemplateManager = new UnitTemplateManager ();
 
+	public UnitTemplateManager UnitTemplateManager {
+		get {
+			return unitTemplateManager;
+		}
+	}
+
 	private static GameWorld instance;
 
 	public static GameWorld Instance {
@@ -50,6 +56,6 @@ public class GameWorld : MonoBehaviour
 	{
 		//load encounter
 		EncounterTemplate encounterTemplate = encounterTemplateManager.GetTemplateById (1);
-		gameEncounter.Init (encounterTemplate, unitTemplateManager, message, initiativeQueue, gameMap, mainTokenCard, actionMenu);
+		gameEncounter.Init (encounterTemplate);
 	}
 }
