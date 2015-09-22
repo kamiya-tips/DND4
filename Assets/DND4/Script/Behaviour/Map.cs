@@ -28,10 +28,25 @@ public class Map :MonoBehaviour, IMap
 		newUnit.UnitObject.SetActive (false);
 	}
 
+	public void ShowRunArea (GameUnit moveUnit)
+	{
+		Area (moveUnit.X, moveUnit.Y, moveUnit.Template.Speed + 2);
+	}
+
+	public void ShowShiftArea (GameUnit moveUnit)
+	{
+		Area (moveUnit.X, moveUnit.Y, 1);
+	}
+
 	public void ShowMoveArea (GameUnit moveUnit)
 	{
-		for (int i = -moveUnit.Template.Speed; i <= moveUnit.Template.Speed; i++) {
-			for (int j = -moveUnit.Template.Speed; j <= moveUnit.Template.Speed; j++) {
+		Area (moveUnit.X, moveUnit.Y, moveUnit.Template.Speed);
+	}
+
+	private void Area (int x, int y, int range)
+	{
+		for (int i = -range; i <= range; i++) {
+			for (int j = -range; j <= range; j++) {
 				if (i == 0 && j == 0) {
 					continue;
 				}
@@ -40,7 +55,7 @@ public class Map :MonoBehaviour, IMap
 				moveTileList.Add (tile);
 				tile.transform.localPosition = Vector3.zero;
 				tile.transform.localScale = Vector3.one;
-				tile.transform.localPosition = new Vector3 ((moveUnit.X + i) * 100, (moveUnit.Y + j) * 100);
+				tile.transform.localPosition = new Vector3 ((x + i) * 100, (y + j) * 100);
 			}
 		}
 	}

@@ -164,10 +164,22 @@ public class GameUnit
 		gameEncounter.NextUnit ();
 	}
 
-	public void MoveAction ()
+	private void WalkAction ()
 	{
 		GameWorld.Instance.actionMenu.Hide ();
 		GameWorld.Instance.gameMap.ShowMoveArea (this);
+	}
+
+	private void RunAction ()
+	{
+		GameWorld.Instance.actionMenu.Hide ();
+		GameWorld.Instance.gameMap.ShowRunArea (this);
+	}
+
+	private void ShiftAction ()
+	{
+		GameWorld.Instance.actionMenu.Hide ();
+		GameWorld.Instance.gameMap.ShowShiftArea (this);
 	}
 
 	public void OnClickAndShowMainMeun ()
@@ -192,7 +204,9 @@ public class GameUnit
 	protected void ShowMoveMenu ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
-		actionList.Add (BuildActionMenuItem ("移动", MoveAction, true));
+		actionList.Add (BuildActionMenuItem ("快步", ShiftAction, true));
+		actionList.Add (BuildActionMenuItem ("移动", WalkAction, true));
+		actionList.Add (BuildActionMenuItem ("奔跑", RunAction, true));
 		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
