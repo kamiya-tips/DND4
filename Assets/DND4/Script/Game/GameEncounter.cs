@@ -77,4 +77,14 @@ public class GameEncounter
 			nowUnitIndex++;
 		}
 	}
+
+	public bool IsEmpty (int x, int y)
+	{
+		for (int i = 0; i < unitList.Count; i++) {
+			if (unitList [i].X == x && unitList [i].Y == y) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

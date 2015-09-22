@@ -56,7 +56,7 @@ public class Map :MonoBehaviour, IMap
 				if (x + i >= mapW || y + j >= mapH) {
 					continue;
 				}
-				if (i == 0 && j == 0) {
+				if (GameWorld.Instance.Encounter.IsEmpty (x + i, y + j) == false) {
 					continue;
 				}
 				GameObject tile = GameObject.Instantiate (moveTile);

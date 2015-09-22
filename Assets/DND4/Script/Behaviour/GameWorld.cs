@@ -16,7 +16,14 @@ public class GameWorld : MonoBehaviour
 	public TokenCard aimTokenCard;
 	public ActionMenu actionMenu;
 
-	private GameEncounter gameEncounter = new GameEncounter ();
+	private GameEncounter encounter = new GameEncounter ();
+
+	public GameEncounter Encounter {
+		get {
+			return encounter;
+		}
+	}
+
 	private EncounterTemplateManager encounterTemplateManager = new EncounterTemplateManager ();
 	private UnitTemplateManager unitTemplateManager = new UnitTemplateManager ();
 
@@ -56,6 +63,6 @@ public class GameWorld : MonoBehaviour
 	{
 		//load encounter
 		EncounterTemplate encounterTemplate = encounterTemplateManager.GetTemplateById (1);
-		gameEncounter.Init (encounterTemplate);
+		encounter.Init (encounterTemplate);
 	}
 }
