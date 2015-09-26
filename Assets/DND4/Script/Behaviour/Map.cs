@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Map :MonoBehaviour, IMap
+public class Map :MonoBehaviour
 {
 	public TweenPosition tween;	
 	public Transform mapRoot;
@@ -12,7 +12,6 @@ public class Map :MonoBehaviour, IMap
 	private int mapH = 21;
 	private int mapW = 30;
 	private int tileSize = 100;
-	#region IMap implementation
 	
 	public void LookAtPos (VectorInt2 pos, EventDelegate.Callback callback)
 	{
@@ -61,6 +60,4 @@ public class Map :MonoBehaviour, IMap
 		}
 		moveTileList.Clear ();
 	}
-
-	#endregion
 }

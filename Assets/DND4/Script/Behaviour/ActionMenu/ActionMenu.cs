@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ActionMenu : MonoBehaviour,IActionMenu
+public class ActionMenu : MonoBehaviour
 {
 	public UISprite bgSprite;
 	public GameObject buttonObj;
@@ -18,8 +18,6 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 		buttonPos [2] = new int[]{30,0,-30};
 		buttonPos [3] = new int[]{45,15,-15,-45};
 	}
-
-	#region IActionMenu implementation
 
 	public void Show (int x, int y, List<ActionMenuItem> actionMenuItemList)
 	{
@@ -52,6 +50,4 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 	{
 		bgSprite.gameObject.SetActive (false);
 	}
-	#endregion
-	
 }

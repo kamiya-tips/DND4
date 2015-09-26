@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
+public class InitiativeQueue : MonoBehaviour
 {
 	public Transform initRoot;
 	private const int TOKEN_SIZE = 50;
@@ -20,8 +20,6 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 		endTurnPos = Vector3.zero;
 		activePos = new Vector3 (0, baseTop);
 	}
-
-	#region IInitiativeQueue implementation
 
 	public void UnitStartTurn ()
 	{
@@ -116,5 +114,4 @@ public class InitiativeQueue : MonoBehaviour, IInitiativeQueue
 		}
 		PlayInitToken (maskHeight, 0);
 	}
-	#endregion
 }

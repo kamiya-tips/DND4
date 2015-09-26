@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TokenCard : MonoBehaviour,ITokenCard
+public class TokenCard : MonoBehaviour
 {
 	public UISprite sprite;
 	public UILabel unitName;
@@ -13,7 +13,7 @@ public class TokenCard : MonoBehaviour,ITokenCard
 	public UILabel reflex;
 	public UILabel will;
 	private GameUnit showUnit;
-	#region ITokenCard implementation
+
 	public void UpdateToken (GameUnit unit)
 	{
 		this.showUnit = unit;
@@ -31,7 +31,6 @@ public class TokenCard : MonoBehaviour,ITokenCard
 		reflex.text = unit.Template.Reflex.ToString ();
 		will.text = unit.Template.Will.ToString ();
 	}
-	#endregion
 
 	public void OnClick ()
 	{
