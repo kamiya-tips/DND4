@@ -9,7 +9,7 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 	private int MEUN_HEIGHT = 40;
 	private List<GameObject> buttonList = new List<GameObject> ();
 	private int[][] buttonPos;
-
+	private float tileSize = 100.0f;
 	public void Awake ()
 	{
 		buttonPos = new int[4][];
@@ -20,7 +20,8 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 	}
 
 	#region IActionMenu implementation
-	public void Show (List<ActionMenuItem> actionMenuItemList)
+
+	public void Show (int x, int y, List<ActionMenuItem> actionMenuItemList)
 	{
 		Hide ();
 		for (int i = 0; i < buttonList.Count; i++) {
@@ -39,7 +40,13 @@ public class ActionMenu : MonoBehaviour,IActionMenu
 			newButton.GetComponent<UIButton> ().isEnabled = item.Enable;
 			buttonList.Add (newButton);
 		}
+		bgSprite.gameObject.transform.localPosition = new Vector3 (x * tileSize, y * tileSize);
 		bgSprite.gameObject.SetActive (true);
+	}
+
+	public void Show (List<ActionMenuItem> actionMenuItemList)
+	{
+		Show (1, 0, actionMenuItemList);
 	}
 	public void Hide ()
 	{

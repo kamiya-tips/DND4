@@ -31,25 +31,10 @@ public class Map :MonoBehaviour, IMap
 		newUnit.UnitObject.SetActive (false);
 	}
 
-	public void ShowRunArea (GameUnit moveUnit)
+	public void ShowArea (int x, int y, int size)
 	{
-		Area (moveUnit.X, moveUnit.Y, moveUnit.Template.Speed + 2);
-	}
-
-	public void ShowShiftArea (GameUnit moveUnit)
-	{
-		Area (moveUnit.X, moveUnit.Y, 1);
-	}
-
-	public void ShowMoveArea (GameUnit moveUnit)
-	{
-		Area (moveUnit.X, moveUnit.Y, moveUnit.Template.Speed);
-	}
-
-	private void Area (int x, int y, int range)
-	{
-		for (int i = -range; i <= range; i++) {
-			for (int j = -range; j <= range; j++) {
+		for (int i = -size; i <= size; i++) {
+			for (int j = -size; j <= size; j++) {
 				if (x + i < 0 || y + j < 0) {
 					continue;
 				}

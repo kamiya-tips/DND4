@@ -163,23 +163,55 @@ public class GameUnit
 		isActive = false;
 		gameEncounter.NextUnit ();
 	}
+	private int allSpeed = 0;
+	private int leftSpeed = 0;
 
 	private void WalkAction ()
 	{
-		GameWorld.Instance.actionMenu.Hide ();
-		GameWorld.Instance.gameMap.ShowMoveArea (this);
+		ShowDefaultMoveMenu ();
+		allSpeed = template.Speed;
+		leftSpeed = allSpeed;
+		GameWorld.Instance.gameMap.ShowArea (x, y, leftSpeed);
 	}
 
 	private void RunAction ()
 	{
-		GameWorld.Instance.actionMenu.Hide ();
-		GameWorld.Instance.gameMap.ShowRunArea (this);
+		ShowDefaultMoveMenu ();
+		allSpeed = template.Speed + 2;
+		leftSpeed = allSpeed;
+		GameWorld.Instance.gameMap.ShowArea (x, y, leftSpeed);
 	}
 
 	private void ShiftAction ()
 	{
-		GameWorld.Instance.actionMenu.Hide ();
-		GameWorld.Instance.gameMap.ShowShiftArea (this);
+		ShowDefaultMoveMenu ();
+		allSpeed = 1;
+		leftSpeed = allSpeed;
+		GameWorld.Instance.gameMap.ShowArea (x, y, leftSpeed);
+	}
+
+	private void ShowDefaultMoveMenu ()
+	{
+		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
+		if (leftSpeed < allSpeed) {
+			actionList.Add (BuildActionMenuItem ("上一步", BackStep, true));
+			actionList.Add (BuildActionMenuItem ("开始移动", DoMoveAction, true));
+		}
+		actionList.Add (BuildActionMenuItem ("返回", delegate() {
+			ShowMainMeun ();
+			GameWorld.Instance.gameMap.HideArea ();
+		}, true));
+		GameWorld.Instance.actionMenu.Show (0, 0, actionList);
+	}
+
+	private void DoMoveAction ()
+	{
+
+	}
+
+	private void BackStep ()
+	{
+
 	}
 
 	public void OnClickAndShowMainMeun ()
@@ -207,15 +239,6 @@ public class GameUnit
 		actionList.Add (BuildActionMenuItem ("快步", ShiftAction, true));
 		actionList.Add (BuildActionMenuItem ("移动", WalkAction, true));
 		actionList.Add (BuildActionMenuItem ("奔跑", RunAction, true));
-		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
-		GameWorld.Instance.actionMenu.Show (actionList);
-	}
-
-	protected void ShowMoveActionMenu ()
-	{
-		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
-		actionList.Add (BuildActionMenuItem ("确定", WalkAction, true));
-		actionList.Add (BuildActionMenuItem ("取消", RunAction, true));
 		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
