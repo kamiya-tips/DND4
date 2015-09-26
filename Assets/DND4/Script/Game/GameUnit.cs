@@ -171,17 +171,22 @@ public class GameUnit
 	{
 		this.allSpeed = allSpeed;
 		leftSpeed = this.allSpeed;
-		ShowArea ();
+		GameWorld.Instance.gameMap.MoveGameUnit = this;
+		ShowMenuAndArea ();
 	}
 
-	private void ShowArea ()
+	public void MoveTileOnClick (GameObject mapTile)
 	{
-		ShowDefaultMoveMenu ();
-		GameWorld.Instance.gameMap.ShowArea (x, y, leftSpeed);
+		MoveTile tile = mapTile.GetComponent<MoveTile> ();
+		Debug.Log (tile.x);
+		Debug.Log (tile.y);
+		Debug.Log (tile.deltaX);
+		Debug.Log (tile.deltaY);
 	}
 
-	private void ShowDefaultMoveMenu ()
+	private void ShowMenuAndArea ()
 	{
+		//show menu
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
 		if (leftSpeed < allSpeed) {
 			actionList.Add (BuildActionMenuItem ("上一步", BackStep, true));
@@ -192,6 +197,8 @@ public class GameUnit
 			GameWorld.Instance.gameMap.HideArea ();
 		}, true));
 		GameWorld.Instance.actionMenu.Show (0, 0, actionList);
+		//show area
+		GameWorld.Instance.gameMap.ShowMoveArea (x, y, leftSpeed);
 	}
 
 	private void DoMoveAction ()

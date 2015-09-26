@@ -12,6 +12,13 @@ public class Map :MonoBehaviour
 	private int mapH = 21;
 	private int mapW = 30;
 	private int tileSize = 100;
+	private GameUnit moveGameUnit;
+
+	public GameUnit MoveGameUnit {
+		set {
+			moveGameUnit = value;
+		}
+	}
 	
 	public void LookAtPos (VectorInt2 pos, EventDelegate.Callback callback)
 	{
@@ -30,7 +37,7 @@ public class Map :MonoBehaviour
 		newUnit.UnitObject.SetActive (false);
 	}
 
-	public void ShowArea (int x, int y, int size)
+	public void ShowMoveArea (int x, int y, int size)
 	{
 		for (int i = -size; i <= size; i++) {
 			for (int j = -size; j <= size; j++) {
@@ -49,6 +56,12 @@ public class Map :MonoBehaviour
 				tile.transform.localPosition = Vector3.zero;
 				tile.transform.localScale = Vector3.one;
 				tile.transform.localPosition = new Vector3 ((x + i) * tileSize, (y + j) * tileSize);
+				MoveTile moveTileBehaviour = tile.GetComponent<MoveTile> ();
+				moveTileBehaviour.x = x;
+				moveTileBehaviour.y = y;
+				moveTileBehaviour.deltaX = i;
+				moveTileBehaviour.deltaY = j;
+				UIEventListener.Get (tile).onClick = moveGameUnit.MoveTileOnClick;
 			}
 		}
 	}
