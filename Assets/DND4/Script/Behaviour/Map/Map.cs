@@ -8,6 +8,7 @@ public class Map :MonoBehaviour
 	public Transform mapRoot;
 	public GameObject unitToken;
 	public GameObject moveTile;
+	public GameObject stepLable;
 	private List<GameObject> moveTileList = new List<GameObject> ();
 	private int mapH = 21;
 	private int mapW = 30;
@@ -39,6 +40,7 @@ public class Map :MonoBehaviour
 
 	public void ShowMoveArea (int x, int y, int size)
 	{
+		HideArea ();
 		for (int i = -size; i <= size; i++) {
 			for (int j = -size; j <= size; j++) {
 				if (x + i < 0 || y + j < 0) {
@@ -72,5 +74,29 @@ public class Map :MonoBehaviour
 			GameObject.Destroy (moveTileList [i]);
 		}
 		moveTileList.Clear ();
+	}
+
+	private List<GameObject> stepListLabel = new List<GameObject> ();
+
+	public void ShowStep (List<VectorInt2> stepList)
+	{
+		HideStep ();
+		for (int i = 0; i < stepList.Count; i++) {
+			GameObject stepTemp = GameObject.Instantiate (stepLable);
+			stepTemp.transform.parent = mapRoot;
+			stepListLabel.Add (stepTemp);
+			stepTemp.transform.localPosition = Vector3.zero;
+			stepTemp.transform.localScale = Vector3.one;
+			stepTemp.transform.localPosition = new Vector3 (stepList [i].X * 100 + 50, stepList [i].Y * 100 + 50);
+			stepTemp.GetComponent<UILabel> ().text = (i + 1).ToString ();
+		}
+	}
+
+	public void HideStep ()
+	{
+		for (int i = 0; i < stepListLabel.Count; i++) {
+			GameObject.Destroy (stepListLabel [i]);
+		}
+		stepListLabel.Clear ();
 	}
 }

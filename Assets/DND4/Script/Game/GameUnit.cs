@@ -172,16 +172,23 @@ public class GameUnit
 		this.allSpeed = allSpeed;
 		leftSpeed = this.allSpeed;
 		GameWorld.Instance.gameMap.MoveGameUnit = this;
+		movePath.Clear ();
 		ShowMenuAndArea ();
 	}
+
+	private List<VectorInt2> movePath = new List<VectorInt2> ();
 
 	public void MoveTileOnClick (GameObject mapTile)
 	{
 		MoveTile tile = mapTile.GetComponent<MoveTile> ();
-		Debug.Log (tile.x);
-		Debug.Log (tile.y);
-		Debug.Log (tile.deltaX);
-		Debug.Log (tile.deltaY);
+		VectorInt2 newPos = new VectorInt2 (tile.x + tile.deltaX, tile.y + tile.deltaY);
+		movePath.Add (newPos);
+		GameWorld.Instance.gameMap.ShowStep (movePath);
+		GameWorld.Instance.gameMap.LookAtPos (newPos, delegate {
+			int speedCost = Mathf.Max (Mathf.Abs (tile.deltaX), Mathf.Abs (tile.deltaY));
+			leftSpeed -= speedCost;
+			ShowMenuAndArea ();
+		});
 	}
 
 	private void ShowMenuAndArea ()
@@ -193,12 +200,17 @@ public class GameUnit
 			actionList.Add (BuildActionMenuItem ("开始移动", DoMoveAction, true));
 		}
 		actionList.Add (BuildActionMenuItem ("返回", delegate() {
-			ShowMainMeun ();
+			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (this.x, this.y), ShowMainMeun);
 			GameWorld.Instance.gameMap.HideArea ();
+			GameWorld.Instance.gameMap.HideStep ();
 		}, true));
 		GameWorld.Instance.actionMenu.Show (0, 0, actionList);
 		//show area
-		GameWorld.Instance.gameMap.ShowMoveArea (x, y, leftSpeed);
+		if (movePath.Count > 0) {
+			GameWorld.Instance.gameMap.ShowMoveArea (movePath [movePath.Count - 1].X, movePath [movePath.Count - 1].Y, leftSpeed);
+		} else {
+			GameWorld.Instance.gameMap.ShowMoveArea (x, y, leftSpeed);
+		}
 	}
 
 	private void DoMoveAction ()
@@ -208,7 +220,14 @@ public class GameUnit
 
 	private void BackStep ()
 	{
-
+		leftSpeed++;
+		VectorInt2 prePos = new VectorInt2 (x, y);
+		if (leftSpeed < allSpeed) {
+			prePos = movePath [movePath.Count - 2];
+		}
+		movePath.RemoveAt (movePath.Count - 1);
+		GameWorld.Instance.gameMap.ShowStep (movePath);
+		GameWorld.Instance.gameMap.LookAtPos (prePos, ShowMenuAndArea);
 	}
 
 	public void OnClickAndShowMainMeun ()
