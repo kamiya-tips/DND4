@@ -163,30 +163,20 @@ public class GameUnit
 		isActive = false;
 		gameEncounter.NextUnit ();
 	}
+
 	private int allSpeed = 0;
 	private int leftSpeed = 0;
 
-	private void WalkAction ()
+	private void ShowAreaWithAllSpeed (int allSpeed)
 	{
-		ShowDefaultMoveMenu ();
-		allSpeed = template.Speed;
-		leftSpeed = allSpeed;
-		GameWorld.Instance.gameMap.ShowArea (x, y, leftSpeed);
+		this.allSpeed = allSpeed;
+		leftSpeed = this.allSpeed;
+		ShowArea ();
 	}
 
-	private void RunAction ()
+	private void ShowArea ()
 	{
 		ShowDefaultMoveMenu ();
-		allSpeed = template.Speed + 2;
-		leftSpeed = allSpeed;
-		GameWorld.Instance.gameMap.ShowArea (x, y, leftSpeed);
-	}
-
-	private void ShiftAction ()
-	{
-		ShowDefaultMoveMenu ();
-		allSpeed = 1;
-		leftSpeed = allSpeed;
 		GameWorld.Instance.gameMap.ShowArea (x, y, leftSpeed);
 	}
 
@@ -233,12 +223,18 @@ public class GameUnit
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
 
-	protected void ShowMoveMenu ()
+	private void ShowMoveMenu ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
-		actionList.Add (BuildActionMenuItem ("快步", ShiftAction, true));
-		actionList.Add (BuildActionMenuItem ("移动", WalkAction, true));
-		actionList.Add (BuildActionMenuItem ("奔跑", RunAction, true));
+		actionList.Add (BuildActionMenuItem ("快步", delegate {
+			ShowAreaWithAllSpeed (1);
+		}, true));
+		actionList.Add (BuildActionMenuItem ("移动", delegate {
+			ShowAreaWithAllSpeed (template.Speed);
+		}, true));
+		actionList.Add (BuildActionMenuItem ("奔跑", delegate {
+			ShowAreaWithAllSpeed (template.Speed + 2);
+		}, true));
 		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
