@@ -221,6 +221,8 @@ public class GameUnit
 	private void DoMoveAction ()
 	{
 		GameWorld.Instance.gameMap.LookAtPos (movePath [0], delegate() {
+			X = movePath [0].X;
+			Y = movePath [0].Y;
 			movePath.RemoveAt (0);
 			if (movePath.Count > 0) {
 				DoMoveAction ();
