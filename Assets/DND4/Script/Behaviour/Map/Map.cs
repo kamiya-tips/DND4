@@ -52,6 +52,9 @@ public class Map :MonoBehaviour
 				if (GameWorld.Instance.Encounter.IsEmpty (x + i, y + j) == false) {
 					continue;
 				}
+				if (i == 0 && j == 0) {
+					continue;
+				}
 				GameObject tile = GameObject.Instantiate (moveTile);
 				tile.transform.parent = mapRoot;
 				moveTileList.Add (tile);
