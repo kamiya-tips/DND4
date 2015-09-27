@@ -197,7 +197,12 @@ public class GameUnit
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
 		if (leftSpeed < allSpeed) {
 			actionList.Add (BuildActionMenuItem ("上一步", BackStep, true));
-			actionList.Add (BuildActionMenuItem ("开始移动", DoMoveAction, true));
+			actionList.Add (BuildActionMenuItem ("开始移动", delegate() {
+				GameWorld.Instance.gameMap.HideArea ();
+				GameWorld.Instance.gameMap.HideStep ();
+				GameWorld.Instance.actionMenu.Hide ();
+				DoMoveAction ();
+			}, true));
 		}
 		actionList.Add (BuildActionMenuItem ("返回", delegate() {
 			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (this.x, this.y), ShowMainMeun);
@@ -215,7 +220,14 @@ public class GameUnit
 
 	private void DoMoveAction ()
 	{
-
+		GameWorld.Instance.gameMap.LookAtPos (movePath [0], delegate() {
+			movePath.RemoveAt (0);
+			if (movePath.Count > 0) {
+				DoMoveAction ();
+			} else {
+				ShowMainMeun ();
+			}
+		});
 	}
 
 	private void BackStep ()
