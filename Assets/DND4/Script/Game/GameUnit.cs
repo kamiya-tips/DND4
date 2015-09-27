@@ -181,12 +181,31 @@ public class GameUnit
 	public void MoveTileOnClick (GameObject mapTile)
 	{
 		MoveTile tile = mapTile.GetComponent<MoveTile> ();
-		VectorInt2 newPos = new VectorInt2 (tile.x + tile.deltaX, tile.y + tile.deltaY);
-		movePath.Add (newPos);
+		int speedCost = Mathf.Max (Mathf.Abs (tile.deltaX), Mathf.Abs (tile.deltaY));
+		leftSpeed -= speedCost;
+		// make path
+		int speedX = 0;
+		if (tile.deltaX != 0) {
+			speedX = tile.deltaX / Mathf.Abs (tile.deltaX);
+		}
+		int speedY = 0;
+		if (tile.deltaY != 0) {
+			speedY = tile.deltaY / Mathf.Abs (tile.deltaY);
+		}
+		for (int i = 1; i <= speedCost; i++) {
+			int posX = speedX * i;
+			if (Mathf.Abs (posX) > Mathf.Abs (tile.deltaX)) {
+				posX = tile.deltaX;
+			}
+			int posY = speedY * i;
+			if (Mathf.Abs (posY) > Mathf.Abs (tile.deltaY)) {
+				posY = tile.deltaY;
+			}
+			VectorInt2 newPos = new VectorInt2 (tile.x + posX, tile.y + posY);
+			movePath.Add (newPos);
+		}
 		GameWorld.Instance.gameMap.ShowStep (movePath);
-		GameWorld.Instance.gameMap.LookAtPos (newPos, delegate {
-			int speedCost = Mathf.Max (Mathf.Abs (tile.deltaX), Mathf.Abs (tile.deltaY));
-			leftSpeed -= speedCost;
+		GameWorld.Instance.gameMap.LookAtPos (movePath [movePath.Count - 1], delegate {
 			ShowMenuAndArea ();
 		});
 	}
@@ -234,12 +253,17 @@ public class GameUnit
 
 	private void BackStep ()
 	{
-		leftSpeed++;
-		VectorInt2 prePos = new VectorInt2 (x, y);
-		if (leftSpeed < allSpeed) {
-			prePos = movePath [movePath.Count - 2];
-		}
-		movePath.RemoveAt (movePath.Count - 1);
+		VectorInt2 prePos;
+		do {
+			leftSpeed++;
+			movePath.RemoveAt (movePath.Count - 1);
+			if (leftSpeed == allSpeed) {
+				prePos = new VectorInt2 (x, y);
+				break;
+			} else {
+				prePos = movePath [movePath.Count - 1];
+			}
+		} while (GameWorld.Instance.Encounter.IsEmpty (prePos.X, prePos.Y)==false);
 		GameWorld.Instance.gameMap.ShowStep (movePath);
 		GameWorld.Instance.gameMap.LookAtPos (prePos, ShowMenuAndArea);
 	}
