@@ -296,8 +296,23 @@ public class GameUnit
 	public void ShowMainMeun ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
+		actionList.Add (BuildActionMenuItem ("标准动作", ShowStandardMenu, true));
 		actionList.Add (BuildActionMenuItem ("移动动作", ShowMoveMenu, true));
 		actionList.Add (BuildActionMenuItem ("回合结束", EndTurn, true));
+		GameWorld.Instance.actionMenu.Show (actionList);
+	}
+
+	private void ShowStandardMenu ()
+	{
+		GameWorld.Instance.Encounter.HideAttackTarget ();
+		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
+		actionList.Add (BuildActionMenuItem ("匕首", delegate() {
+			GameWorld.Instance.Encounter.ShowAttackTarget (this, 1);
+			List<ActionMenuItem> attackActionList = new List<ActionMenuItem> ();
+			attackActionList.Add (BuildActionMenuItem ("返回", ShowStandardMenu, true));
+			GameWorld.Instance.actionMenu.Show (0, 0, attackActionList);
+		}, true));
+		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
 		GameWorld.Instance.actionMenu.Show (actionList);
 	}
 
@@ -324,5 +339,19 @@ public class GameUnit
 		item.OnClick = onClick;
 		item.Enable = enable;
 		return item;
+	}
+
+	public void ShowAttactedState ()
+	{
+		TweenColor tweenColor = unitObject.GetComponent<TweenColor> ();
+		tweenColor.ResetToBeginning ();
+		tweenColor.PlayForward ();
+	}
+
+	public void HideAttackedState ()
+	{
+		TweenColor tweenColor = unitObject.GetComponent<TweenColor> ();
+		tweenColor.ResetToBeginning ();
+		tweenColor.enabled = false;
 	}
 }

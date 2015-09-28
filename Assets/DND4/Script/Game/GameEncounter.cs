@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GameEncounter
 {
@@ -87,5 +88,25 @@ public class GameEncounter
 			}
 		}
 		return true;
+	}
+
+	public void ShowAttackTarget (GameUnit attacker, int range)
+	{
+		HideAttackTarget ();
+		for (int i = 0; i < unitList.Count; i++) {
+			GameUnit temp = unitList [i];
+			if (attacker.IsEnemy (temp) == true) {
+				if (Mathf.Abs (temp.X - attacker.X) <= range && Mathf.Abs (temp.Y - attacker.Y) <= range) {
+					temp.ShowAttactedState ();
+				}
+			}
+		}
+	}
+
+	public void HideAttackTarget ()
+	{
+		for (int i = 0; i < unitList.Count; i++) {
+			unitList [i].HideAttackedState ();
+		}
 	}
 }
