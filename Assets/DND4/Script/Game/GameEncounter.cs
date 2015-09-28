@@ -41,7 +41,9 @@ public class GameEncounter
 			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (unit.X, unit.Y), delegate {
 				unit.UnitObject.SetActive (true);
 				GameWorld.Instance.initiativeQueue.AddNewUnit (unit);
-				GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]先攻:[00FF00]{1}[-]", unit.Name, unit.Initiative), RollInitiative);
+				GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]投先攻:[00FF00]{1}[-]", unit.Name, unit.InitiativeMessage ()), delegate {
+					GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]先攻:[00FF00]{1}[-]", unit.Name, unit.InitiativeResultMessage ()), RollInitiative);
+				});
 			});
 		} else {
 			this.unitList.Sort (new InitiativeComparer ());
@@ -90,9 +92,29 @@ public class GameEncounter
 		return true;
 	}
 
+	private GameUnit attacker = null;
+	private int range;
+	public bool IsSelectedState {
+		get {
+			return attacker != null;
+		}
+	}
+
+	public void UnitOnClick (GameUnit clickUnit)
+	{
+		if (attacker != null) {
+			if (attacker.IsEnemy (clickUnit) == true) {
+				if (Mathf.Abs (clickUnit.X - attacker.X) <= range && Mathf.Abs (clickUnit.Y - attacker.Y) <= range) {
+					attacker.DoAttackAction (clickUnit);
+				}
+			}
+		}
+	}
+
 	public void ShowAttackTarget (GameUnit attacker, int range)
 	{
-		HideAttackTarget ();
+		this.attacker = attacker;
+		this.range = range;
 		for (int i = 0; i < unitList.Count; i++) {
 			GameUnit temp = unitList [i];
 			if (attacker.IsEnemy (temp) == true) {
@@ -105,6 +127,7 @@ public class GameEncounter
 
 	public void HideAttackTarget ()
 	{
+		this.attacker = null;
 		for (int i = 0; i < unitList.Count; i++) {
 			unitList [i].HideAttackedState ();
 		}

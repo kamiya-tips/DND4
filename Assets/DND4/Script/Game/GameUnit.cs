@@ -40,7 +40,7 @@ public class GameUnit
 			unitObject.transform.localScale = Vector3.one;
 			UISprite sprite = unitObject.GetComponent<UISprite> ();
 			sprite.spriteName = template.SpriteName;
-			UIEventListener.Get (unitObject).onClick = OnClickAndShowMainMeun;
+			UIEventListener.Get (unitObject).onClick = OnClick;
 		}
 	}
 
@@ -160,6 +160,16 @@ public class GameUnit
 	public void RollInitiative ()
 	{
 		initiative = Dice.Roll (DiceType.D20, template.Initiative);
+	}
+
+	public string InitiativeMessage ()
+	{
+		return "D20+" + template.Initiative.ToString ();
+	}
+
+	public string InitiativeResultMessage ()
+	{
+		return string.Format ("{0}+{1}={2}", initiative - template.Initiative, template.Initiative, initiative);
 	}
 
 	public void StartRound ()
@@ -282,6 +292,15 @@ public class GameUnit
 		GameWorld.Instance.gameMap.LookAtPos (prePos, ShowMenuAndArea);
 	}
 
+	public void OnClick (GameObject sender)
+	{
+		if (GameWorld.Instance.Encounter.IsSelectedState == true) {
+			GameWorld.Instance.Encounter.UnitOnClick (this);
+		} else {
+			OnClickAndShowMainMeun (this.UnitObject);
+		}
+	}
+
 	public void OnClickAndShowMainMeun (GameObject sender)
 	{
 		GameWorld.Instance.actionMenu.Hide ();
@@ -318,6 +337,23 @@ public class GameUnit
 		}, true));
 		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
 		GameWorld.Instance.actionMenu.Show (actionList);
+	}
+
+	public void DoAttackAction (GameUnit target)
+	{
+		GameWorld.Instance.gameMap.HideAttackArea ();
+		GameWorld.Instance.Encounter.HideAttackTarget ();
+		GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (target.X, target.Y), delegate() {
+			int oldX = X;
+			int oldY = Y;
+			X = target.X;
+			Y = target.Y;
+			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (oldX, oldY), delegate() {
+				X = oldX;
+				Y = oldY;
+				ShowMainMeun ();
+			});
+		});
 	}
 
 	private void ShowMoveMenu ()
