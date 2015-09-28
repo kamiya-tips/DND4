@@ -24,4 +24,15 @@ public class EncounterUnitData
 			pos = value;
 		}
 	}
+
+	private UnitSide unitSide;
+
+	public UnitSide UnitSide {
+		get {
+			return unitSide;
+		}
+		set {
+			unitSide = value;
+		}
+	}
 }

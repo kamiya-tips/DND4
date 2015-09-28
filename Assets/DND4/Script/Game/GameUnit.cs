@@ -4,6 +4,22 @@ using System.Collections.Generic;
 
 public class GameUnit
 {
+	private UnitSide unitSide;
+
+	public UnitSide UnitSide {
+		get {
+			return unitSide;
+		}
+		set {
+			unitSide = value;
+		}
+	}
+
+	public bool IsEnemy (GameUnit targetUnit)
+	{
+		return UnitSide != targetUnit.UnitSide;
+	}
+
 	private bool isActive = false;
 
 	public bool IsActive {

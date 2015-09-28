@@ -20,6 +20,7 @@ public class GameEncounter
 			GameWorld.Instance.gameMap.AddGameUnit (unit);
 			unit.X = data.Pos.X;
 			unit.Y = data.Pos.Y;
+			unit.UnitSide = data.UnitSide;
 			unitList.Add (unit);
 		}
 		GameWorld.Instance.message.ShowMessage ("战斗开始", delegate () {
