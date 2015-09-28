@@ -659,6 +659,7 @@ MonoBehaviour:
   unitToken: {fileID: 1725362759}
   moveTile: {fileID: 703534602}
   stepLable: {fileID: 1000235364}
+  tileSize: 100
 --- !u!1 &237269233
 GameObject:
   m_ObjectHideFlags: 0
