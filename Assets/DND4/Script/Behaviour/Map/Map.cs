@@ -15,6 +15,17 @@ public class Map :MonoBehaviour
 	private int mapW = 30;
 	private GameUnit moveGameUnit;
 
+	public void Awake ()
+	{
+		UIEventListener.Get (mapRoot.gameObject).onClick = HideMenu;
+		UIEventListener.Get (mapRoot.gameObject).onDragStart += HideMenu;
+	}
+
+	private void HideMenu (GameObject sender)
+	{
+		GameWorld.Instance.actionMenu.Hide ();
+	}
+
 	public GameUnit MoveGameUnit {
 		set {
 			moveGameUnit = value;
