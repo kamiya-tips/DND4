@@ -10,7 +10,6 @@ public class Map :MonoBehaviour
 	public GameObject moveTile;
 	public GameObject stepLable;
 	public int tileSize = 100;
-	private List<GameObject> moveTileList = new List<GameObject> ();
 	private int mapH = 21;
 	private int mapW = 30;
 	private GameUnit moveGameUnit;
@@ -48,7 +47,8 @@ public class Map :MonoBehaviour
 		newUnit.UnitObject = unitObject;
 		newUnit.UnitObject.SetActive (false);
 	}
-
+	
+	private List<GameObject> moveTileList = new List<GameObject> ();
 	public void ShowMoveArea (int x, int y, int size)
 	{
 		HideArea ();
@@ -84,10 +84,7 @@ public class Map :MonoBehaviour
 
 	public void HideArea ()
 	{
-		for (int i = 0; i < moveTileList.Count; i++) {
-			GameObject.Destroy (moveTileList [i]);
-		}
-		moveTileList.Clear ();
+		ClearList (moveTileList);
 	}
 
 	private List<GameObject> stepListLabel = new List<GameObject> ();
@@ -108,9 +105,46 @@ public class Map :MonoBehaviour
 
 	public void HideStep ()
 	{
-		for (int i = 0; i < stepListLabel.Count; i++) {
-			GameObject.Destroy (stepListLabel [i]);
+		ClearList (stepListLabel);
+	}
+
+	private List<GameObject> attackTileList = new List<GameObject> ();
+	public void ShowAttackArea (int x, int y, int size)
+	{
+		HideAttackArea ();
+		for (int i = -size; i <= size; i++) {
+			for (int j = -size; j <= size; j++) {
+				if (x + i < 0 || y + j < 0) {
+					continue;
+				}
+				if (x + i >= mapW || y + j >= mapH) {
+					continue;
+				}
+				if (i == 0 && j == 0) {
+					continue;
+				}
+				GameObject tile = GameObject.Instantiate (moveTile);
+				tile.transform.parent = mapRoot;
+				attackTileList.Add (tile);
+				tile.transform.localPosition = Vector3.zero;
+				tile.transform.localScale = Vector3.one;
+				tile.transform.localPosition = new Vector3 ((x + i) * tileSize, (y + j) * tileSize);
+				tile.GetComponent<Collider> ().enabled = false;
+				tile.GetComponent<UISprite> ().color = Color.red;
+			}
 		}
-		stepListLabel.Clear ();
+	}
+
+	public void HideAttackArea ()
+	{
+		ClearList (attackTileList);
+	}
+
+	private void ClearList (List<GameObject> tempList)
+	{
+		for (int i = 0; i < tempList.Count; i++) {
+			GameObject.Destroy (tempList [i]);
+		}
+		tempList.Clear ();
 	}
 }

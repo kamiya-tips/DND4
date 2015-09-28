@@ -304,12 +304,16 @@ public class GameUnit
 
 	private void ShowStandardMenu ()
 	{
-		GameWorld.Instance.Encounter.HideAttackTarget ();
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
 		actionList.Add (BuildActionMenuItem ("匕首", delegate() {
+			GameWorld.Instance.gameMap.ShowAttackArea (X, Y, 1);
 			GameWorld.Instance.Encounter.ShowAttackTarget (this, 1);
 			List<ActionMenuItem> attackActionList = new List<ActionMenuItem> ();
-			attackActionList.Add (BuildActionMenuItem ("返回", ShowStandardMenu, true));
+			attackActionList.Add (BuildActionMenuItem ("返回", delegate() {
+				ShowStandardMenu ();
+				GameWorld.Instance.gameMap.HideAttackArea ();
+				GameWorld.Instance.Encounter.HideAttackTarget ();
+			}, true));
 			GameWorld.Instance.actionMenu.Show (0, 0, attackActionList);
 		}, true));
 		actionList.Add (BuildActionMenuItem ("返回", ShowMainMeun, true));
@@ -351,7 +355,7 @@ public class GameUnit
 	public void HideAttackedState ()
 	{
 		TweenColor tweenColor = unitObject.GetComponent<TweenColor> ();
-		tweenColor.ResetToBeginning ();
 		tweenColor.enabled = false;
+		unitObject.GetComponent<UISprite> ().color = Color.white;
 	}
 }
