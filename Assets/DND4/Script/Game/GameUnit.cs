@@ -238,7 +238,7 @@ public class GameUnit
 			}, true));
 		}
 		actionList.Add (BuildActionMenuItem ("返回", delegate() {
-			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (this.x, this.y), ShowMainMeun);
+			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (this.x, this.y), ShowMoveMenu);
 			GameWorld.Instance.gameMap.HideArea ();
 			GameWorld.Instance.gameMap.HideStep ();
 		}, true));
