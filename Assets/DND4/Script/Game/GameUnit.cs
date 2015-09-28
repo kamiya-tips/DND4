@@ -40,7 +40,7 @@ public class GameUnit
 			unitObject.transform.localScale = Vector3.one;
 			UISprite sprite = unitObject.GetComponent<UISprite> ();
 			sprite.spriteName = template.SpriteName;
-			EventDelegate.Add (unitObject.GetComponent<UIButton> ().onClick, OnClickAndShowMainMeun);
+			UIEventListener.Get (unitObject).onClick = OnClickAndShowMainMeun;
 		}
 	}
 
@@ -282,7 +282,7 @@ public class GameUnit
 		GameWorld.Instance.gameMap.LookAtPos (prePos, ShowMenuAndArea);
 	}
 
-	public void OnClickAndShowMainMeun ()
+	public void OnClickAndShowMainMeun (GameObject sender)
 	{
 		GameWorld.Instance.actionMenu.Hide ();
 		if (isActive == true) {

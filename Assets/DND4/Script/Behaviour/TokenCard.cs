@@ -18,10 +18,7 @@ public class TokenCard : MonoBehaviour
 	{
 		this.showUnit = unit;
 		sprite.spriteName = unit.UnitObject.GetComponent<UISprite> ().spriteName;
-		UIButton uiButton = sprite.gameObject.GetComponent<UIButton> ();
-		if (uiButton != null) {
-			uiButton.normalSprite = sprite.spriteName;
-		}
+		UIEventListener.Get (sprite.gameObject).onClick = showUnit.OnClickAndShowMainMeun;
 		unitName.text = unit.Name;
 		lv.text = unit.Template.Lv.ToString ();
 		speed.text = unit.Template.Speed.ToString ();
@@ -30,12 +27,5 @@ public class TokenCard : MonoBehaviour
 		fortitude.text = unit.Template.Fortitude.ToString ();
 		reflex.text = unit.Template.Reflex.ToString ();
 		will.text = unit.Template.Will.ToString ();
-	}
-
-	public void OnClick ()
-	{
-		if (showUnit != null) {
-			showUnit.OnClickAndShowMainMeun ();
-		}
 	}
 }
