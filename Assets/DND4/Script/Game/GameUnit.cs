@@ -39,8 +39,6 @@ public class GameUnit
 		}
 	}
 
-	private float tokenSize = 100.0f;
-
 	private int x;
 
 	public int X {
@@ -49,7 +47,7 @@ public class GameUnit
 		}
 		set {
 			x = value;
-			unitObject.transform.localPosition = new Vector3 (x * tokenSize, y * tokenSize);
+			unitObject.transform.localPosition = new Vector3 (x * GameWorld.Instance.gameMap.tileSize, y * GameWorld.Instance.gameMap.tileSize);
 		}
 	}
 
@@ -61,7 +59,7 @@ public class GameUnit
 		}
 		set {
 			y = value;
-			unitObject.transform.localPosition = new Vector3 (x * tokenSize, y * tokenSize);
+			unitObject.transform.localPosition = new Vector3 (x * GameWorld.Instance.gameMap.tileSize, y * GameWorld.Instance.gameMap.tileSize);
 		}
 	}
 

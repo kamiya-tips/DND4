@@ -9,10 +9,10 @@ public class Map :MonoBehaviour
 	public GameObject unitToken;
 	public GameObject moveTile;
 	public GameObject stepLable;
+	public int tileSize = 100;
 	private List<GameObject> moveTileList = new List<GameObject> ();
 	private int mapH = 21;
 	private int mapW = 30;
-	private int tileSize = 100;
 	private GameUnit moveGameUnit;
 
 	public GameUnit MoveGameUnit {
