@@ -61,6 +61,7 @@ public class InitiativeQueue : MonoBehaviour
 		unitList.Add (unit);
 		//initiativeQueue token
 		GameObject unitObject = GameObject.Instantiate (unit.UnitObject);
+		UIEventListener.Get (unitObject).onClick = unit.OnClickAndShowMainMeun;
 		unit.InitObject = unitObject;
 		unitObject.transform.parent = this.initRoot;
 		unitObject.transform.localScale = Vector3.one;
