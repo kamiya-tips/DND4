@@ -343,16 +343,41 @@ public class GameUnit
 	{
 		GameWorld.Instance.gameMap.HideAttackArea ();
 		GameWorld.Instance.Encounter.HideAttackTarget ();
-		GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (target.X, target.Y), delegate() {
-			int oldX = X;
-			int oldY = Y;
-			X = target.X;
-			Y = target.Y;
-			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (oldX, oldY), delegate() {
-				X = oldX;
-				Y = oldY;
-				ShowMainMeun ();
+		GameWorld.Instance.actionMenu.Hide ();
+		GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]匕首攻击:[00FF00]D20+5[-]", Name), delegate() {
+			GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (target.X, target.Y), delegate() {
+				int oldX = X;
+				int oldY = Y;
+				X = target.X;
+				Y = target.Y;
+				int ab = Dice.Roll (DiceType.D20, 5);
+				GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]匕首攻击:[00FF00]{1}+5={2}[-]", Name, ab - 5, ab), delegate() {
+					if (ab >= target.template.Ac) {
+						GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]的AC:[00FF00]{1}vs{2}[-]=>[00FF00]hit[-]", target.Name, target.template.Ac, ab), delegate() {
+							GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]匕首伤害:[00FF00]D4+3[-]", Name), delegate() {
+								int damage = Dice.Roll (DiceType.D4, 3);
+								GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]匕首伤害:[00FF00]{1}+3={2}[-]", Name, damage - 3, damage), delegate() {
+									target.TakeDamage (damage);
+									AttackFinish (oldX, oldY);
+								});
+							});
+						});
+					} else {
+						GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]的AC:[00FF00]{1}vs{2}[-]=>[FF0000]miss[-]", target.Name, target.template.Ac, ab), delegate() {
+							AttackFinish (oldX, oldY);
+						});
+					}
+				});
 			});
+		});
+	}
+
+	private void AttackFinish (int x, int y)
+	{
+		GameWorld.Instance.gameMap.LookAtPos (new VectorInt2 (x, y), delegate() {
+			X = x;
+			Y = y;
+			ShowMainMeun ();
 		});
 	}
 
