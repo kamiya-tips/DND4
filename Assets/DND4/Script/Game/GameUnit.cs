@@ -41,6 +41,7 @@ public class GameUnit
 			UISprite sprite = unitObject.GetComponent<UISprite> ();
 			sprite.spriteName = template.SpriteName;
 			UIEventListener.Get (unitObject).onClick = OnClick;
+			hpPopup = unitObject.GetComponent<HpPopup> ();
 		}
 	}
 
@@ -54,6 +55,8 @@ public class GameUnit
 			initObject = value;
 		}
 	}
+
+	private HpPopup hpPopup;
 
 	private int x;
 
@@ -135,10 +138,18 @@ public class GameUnit
 		}
 	}
 
-	public void TakeDamage (int damage)
+	public bool IsDead {
+		get {
+			return hp <= 0;
+		}
+	}
+
+	public bool TakeDamage (int damage)
 	{
 		hp -= damage;
+		return IsDead;
 	}
+
 	private int index;
 
 	public int Index {
@@ -312,6 +323,21 @@ public class GameUnit
 		GameWorld.Instance.aimTokenCard.UpdateToken (this);
 	}
 
+	public void ShowDamage (int hp, EventDelegate.Callback callback)
+	{
+		hpPopup.ShowDamage (hp, callback);
+	}
+
+	public void ShowHeal (int hp, EventDelegate.Callback callback)
+	{
+		hpPopup.ShowHeal (hp, callback);
+	}
+
+	public void ShowDead ()
+	{
+		unitObject.GetComponent<UISprite> ().color = Color.gray;
+	}
+
 	public void ShowMainMeun ()
 	{
 		List<ActionMenuItem> actionList = new List<ActionMenuItem> ();
@@ -357,7 +383,13 @@ public class GameUnit
 							GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]匕首伤害:[00FF00]D4+3[-]", Name), delegate() {
 								int damage = Dice.Roll (DiceType.D4, 3);
 								GameWorld.Instance.message.ShowMessage (string.Format ("[0000FF]{0}[-]匕首伤害:[00FF00]{1}+3={2}[-]", Name, damage - 3, damage), delegate() {
-									target.TakeDamage (damage);
+									if (target.TakeDamage (damage) == true) {
+										//show damage and dead
+										target.ShowDamage (damage, target.ShowDead);
+									} else {
+										//show damage
+										target.ShowDamage (damage, null);
+									}
 									AttackFinish (oldX, oldY);
 								});
 							});
